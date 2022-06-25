@@ -1,0 +1,33 @@
+{%load static%}
+
+<nav class="navbar navbar-expand-lg navbar-nav navbar-right" style="background-color: rgba(0,0,0, 0.4);" >
+  <div class="container-fluid ">
+    <a class="navbar-brand" href="{% url 'home'%}">
+    <img src="{% static 'images/logo1.png' %}">
+    Shashank's Assignment
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    {% if user.is_authenticated%}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" style='color:#c9c9c3;'>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home'%}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'add-city' %}">Add</a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+
+    <div class="form-inline my-2 my-lg-0">
+      <a href="{% url 'logout' %}"class="btn btn-warning">Logout</a>
+    </div>
+
+   {% endif %} 
+</nav>

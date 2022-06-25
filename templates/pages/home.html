@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="bg-text" style="float:none;margin:auto;">
+	 <h2> Our City Database</h2>
+
+</br>
+
+  <table border="1" style="margin: 0px auto;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>State</th>
+        <th>District</th>
+        <th>City</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for data in all_data %}
+        <tr>
+          <td>{{ data.name }}</td>
+          <td>{{ data.country.name }}</td>
+          <td>{{ data.state.name }}</td>
+          <td>{{ data.district.name }}</td>
+          <td>{{ data.city.name }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4">No data in the database. <a href="{% url 'add-city' %}">Add the first data here</a>.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{%endblock%}

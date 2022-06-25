@@ -1,0 +1,69 @@
+{% extends 'base.html'%}
+{% block content%}
+<div class="bg-text">
+  <form method="post" id="CityForm" data-states-url="{% url 'ajax_load_states' %}">
+    {% csrf_token %}
+    <table style="margin: 0px auto;">
+      {{ form.as_table }}
+    </table>
+    
+    <button type="submit" value ='Add City'>Save</button>
+    <a href="{% url 'home'%}">Back</a>
+    
+</form>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+    $("#id_country").change(function () {
+      var url = $("#CityForm").attr("data-states-url");  
+      var countryId = $(this).val();  
+
+      $.ajax({                      
+        url: url,                    
+        data: {
+          'country': countryId       
+        },
+        success: function (data) {  
+          $("#id_state").html(data);  
+        }
+      });
+    });
+
+    $("#id_state").change(function () { 
+    
+    var stateId = $(this).val(); 
+
+      $.ajax({ 
+        url: '{% url 'ajax_load_districts' %}', 
+        data: {
+          'state': stateId 
+        },
+        success: function (data) { 
+          $("#id_district").html(
+            data); 
+        }
+      });
+    });
+
+
+    $("#id_district").change(function () { 
+    
+    var districtId = $(this).val(); 
+
+      $.ajax({ 
+        url: '{% url 'ajax_load_cities' %}', 
+        data: {
+          'district': districtId 
+        },
+        success: function (data) { 
+          $("#id_city").html(
+            data); 
+        }
+      });
+    });
+  </script>
+  </div>
+{%endblock%}
